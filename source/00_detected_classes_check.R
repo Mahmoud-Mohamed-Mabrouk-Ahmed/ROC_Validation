@@ -18,12 +18,12 @@ data_list <- lapply(detect_files, read.csv)
 
 
 # pipeline 1 name
-p1 <- unique(data_list[[1]]$source[!data_list[[1]]$source == ""])
+p1 <- unique(data_list[[1]]$source[!data_list[[1]]$source == ""]) #p1 is the first pipeline
 # rename the first output of the p1 validation 
 names(data_list)[1] <- paste0(p1)
 
 # pipeline 2 name
-p2 <- unique(data_list[[2]]$source[!data_list[[2]]$source == ""])
+p2 <- unique(data_list[[2]]$source[!data_list[[2]]$source == ""]) #p2 is the second pipeline
 # rename the second output of the p2 validation 
 names(data_list)[2] <- paste0(p2)
 
