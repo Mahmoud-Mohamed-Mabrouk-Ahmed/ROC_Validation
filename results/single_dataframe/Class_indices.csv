@@ -1,0 +1,5 @@
+"class","recall","precision","f1_score"
+"complete",0.55,0.59,0.57
+"hair",0.5,1,0.67
+"blurry.complete",0.52,0.98,0.68
+"blurry.incomplete",0.35,0.01,0.01
