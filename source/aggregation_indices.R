@@ -1,13 +1,13 @@
 library(vegan)
 
 #x=matrix(rnorm(10), nrow = 5)
-?rnorm
+??rnorm
 
 xcor=runif(10,1,100)
 
 ycor=runif(10,1,100)
 
-x=cbind(xcor,ycor)
+data=cbind(xcor,ycor)
 
 
 stomata_arrange<- function(x,image_area){
@@ -46,20 +46,35 @@ stomata_arrange<- function(x,image_area){
   return(cbind(stomata_num,stomatal_density,stomata_evenness,stomata_divergence,stomata_aggregation))
 }
 
+# --------------------------------------------------------------------------------------------------
+# Image size calculations
 
-library(openxlsx)
+pic_width_in_pixels = 2592
+pic_height_in_pixels = 1944
+pic_size_in_pixels = pic_width_in_pixels * pic_height_in_pixels #5038848
 
-#setwd(choose.dir())
-#getwd()
-setwd("C:/LCC/写作-lcc/气孔概念性论文/正文/投稿版本")
-arrange=c()
-for (i in 1:9){
-  data=read.xlsx("nine species .xlsx",i,rowNames=F)
-  
-  stomata_arrange(data,342*256)
-  
-  arrange=rbind(arrange,stomata_arrange(data,342*256))
-}
+pixel_size_micrometers = 0.4 #(in the pipeline based on the attached photo that used in calibration to convert pixel to micro)
 
-cor.test(arrange[,5],arrange[,4])
+# 1 micrometer = 0.001 millimeter
+
+pic_width_in_mm = (pic_width_in_pixels * pixel_size_micrometers) / 1000
+pic_height_in_mm = (pic_height_in_pixels * pixel_size_micrometers) / 1000
+
+pixel_size_millimeters = pixel_size_micrometers / 1000
+pixel_size_millimeters  = 4e-04
+
+Picture_Size_mm2 = pic_width_in_mm * pic_height_in_mm
+
+Picture_Size_mm2 
+
+# ---------------------------------------------------------------------------------------------------
+# running function trial
+
+# Apply the stomata_arrange function to the data and store the result
+results <- as.data.frame(stomata_arrange(data, Picture_Size_mm2))
+
+# View the results
+print(results)
+
+
 
